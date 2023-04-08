@@ -5,12 +5,11 @@ use App\Entity\Movement;
 
 
 use App\Repository\MovementRepository;
-use App\Repository\MovementRepository as RepositoryMovementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Doctrine\ORM\EntityManagerInterface;
+
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 
 class clientRequestController  extends AbstractController{
@@ -34,12 +33,6 @@ class clientRequestController  extends AbstractController{
         $movRepo= $MovementRepository->getAllMovements(2);
      
         return new Response(json_encode($movRepo),Response::HTTP_OK);
-    //    return new Response(
-    //     'There are no jobs in the database'.$movRepo,//$Spiel->getPlayerId(), 
-    //      Response::HTTP_OK
-
-        //'There are no jobs in the database'.$parameters['input'], 
-    //);
        
     }
 }

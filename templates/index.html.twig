@@ -5,40 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe</title>
-    <style>
-        body{
-            margin-top:4%;
-            text-align:center;
-             background-color:#e6f7ff;
-        }
-        a{
-            margin: 10px;
-            font-weight: bold;
-            background-color:#80ffc1; 
-            font-size: 3rem;
-            padding:0px 15px 0px 15px;
-            text-decoration: none;
-        }
-        th{
-            border:inline;
-        }
-
-        table {
-                margin: 0 auto;
-                 border-collapse: collapse;
-            }
-
-            .middle {
-                border-bottom: 1pt solid black;
-            }
-            .midHorizental {
-                border-right: 1pt solid black;
-                border-left: 1pt solid black;
-            }
-            a:hover{
-                cursor: pointer;
-            }
-    </style>
+    <link rel="stylesheet" href="css/main.css">;
 </head>
 <body>
     <h1>Tic Tac Toe</h1>
@@ -62,23 +29,6 @@
     </table> 
     <p>Dieses Spiel wurde als Challenge von Ahmad Zia Wasi entwickelt</p>
     <p>Verwendete Technologien, PHP, Twig, SQL und Symfony</p>
-    <script>
-    function played(selection=0){
-        var url = new URL('http://127.0.0.1/selection')
-        var params = {selection:selection} 
-        //url.search = new URLSearchParams(params).toString();
-        fetch(url  ,{
-            method: "POST",
-            body: JSON.stringify({
-            input: selection,
-        }),
-         headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        },})
-        .then(function (response) {
-            return response.text(); })
-        .then(data=>{ console.log(data);} );
-    }
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
