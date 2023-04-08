@@ -1,0 +1,84 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <style>
+        body{
+            margin-top:4%;
+            text-align:center;
+             background-color:#e6f7ff;
+        }
+        a{
+            margin: 10px;
+            font-weight: bold;
+            background-color:#80ffc1; 
+            font-size: 3rem;
+            padding:0px 15px 0px 15px;
+            text-decoration: none;
+        }
+        th{
+            border:inline;
+        }
+
+        table {
+                margin: 0 auto;
+                 border-collapse: collapse;
+            }
+
+            .middle {
+                border-bottom: 1pt solid black;
+            }
+            .midHorizental {
+                border-right: 1pt solid black;
+                border-left: 1pt solid black;
+            }
+            a:hover{
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+    <table>
+    <tr class="middle">
+    {# "{{ path('getInput', {name:'1'}) }}">{{name?}} #}
+        <th><a id='1' onclick="played(1)">1</a></th>
+        <th class="midHorizental"><a id="2" onclick="played(2)">2</a></th>
+        <th><a id="3" onclick="played(3)">3</a></th>
+    </tr>
+    <tr class="middle">
+        <td><a id="4" onclick="played(4)">4</a></td>
+        <td class="midHorizental"><a id="5" onclick="played(5)">5</a></td>
+        <td><a id="6" onclick="played(6)">6</a></td>
+    </tr>
+    <tr >
+        <td><a id="7" onclick="played(7)">7</a></td>
+        <td class="midHorizental"><a id="8" onclick="played(8)">8</a></td>
+        <td><a id="9" onclick="played(8)">9</a></td>
+    </tr>
+    </table> 
+    <p>Dieses Spiel wurde als Challenge von Ahmad Zia Wasi entwickelt</p>
+    <p>Verwendete Technologien, PHP, Twig, SQL und Symfony</p>
+    <script>
+    function played(selection=0){
+        var url = new URL('http://127.0.0.1/selection')
+        var params = {selection:selection} 
+        //url.search = new URLSearchParams(params).toString();
+        fetch(url  ,{
+            method: "POST",
+            body: JSON.stringify({
+            input: selection,
+        }),
+         headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        },})
+        .then(function (response) {
+            return response.text(); })
+        .then(data=>{ console.log(data);} );
+    }
+    </script>
+</body>
+</html>

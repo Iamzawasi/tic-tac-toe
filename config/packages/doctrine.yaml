@@ -1,7 +1,13 @@
 doctrine:
     dbal:
-        url: '%env(resolve:DATABASE_URL)%'
-        server_version: '8'
+        default_connection:       default
+        connections:
+            default:
+                dbname:           tictac
+                user:             root
+                password:         ''
+                host:             localhost
+                server_version:   '5 10.4.21'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
@@ -37,3 +43,4 @@ when@prod:
                     adapter: cache.app
                 doctrine.system_cache_pool:
                     adapter: cache.system
+
