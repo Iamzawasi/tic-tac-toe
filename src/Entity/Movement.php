@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Entity;
-
 use App\Repository\MovementRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,8 +21,11 @@ class Movement
     #[ORM\Column(nullable: true)]
     private array $oldmovments = [];
 
-    #[ORM\Column(nullable: true)]
-    private ?int $game_id = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?int $game_id = null;
+    
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $game_id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $remarks = null;
@@ -74,7 +76,7 @@ class Movement
         return $this->game_id;
     }
 
-    public function setGameId(?int $game_id): self
+    public function setGameId(?string $game_id): self
     {
         $this->game_id = $game_id;
 

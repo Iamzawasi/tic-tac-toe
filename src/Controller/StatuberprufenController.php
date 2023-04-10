@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StatuberprufenController extends AbstractController{
-
       /**
      * @Route("/", name="main")
      */

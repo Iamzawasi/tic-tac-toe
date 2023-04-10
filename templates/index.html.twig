@@ -10,21 +10,23 @@
 <body>
     <h1>Tic Tac Toe</h1>
     <table>
+    <tr><p id="gameId"></p></tr>
+    <tr><p id="playerId"></p></tr>
     <tr class="middle">
     {# "{{ path('getInput', {name:'1'}) }}">{{name?}} #}
-        <th><a id='1' onclick="played(1)">1</a></th>
-        <th class="midHorizental"><a id="2" onclick="played(2)">2</a></th>
-        <th><a id="3" onclick="played(3)">3</a></th>
+        <th><a class="hiddentext" id='1' onclick="played(1)">1</a></th>
+        <th class="midHorizental"><a class="hiddentext" id="2" onclick="played(2)">2</a></th>
+        <th><a class="hiddentext" id="3" onclick="played(3)">3</a></th>
     </tr>
     <tr class="middle">
-        <td><a id="4" onclick="played(4)">4</a></td>
-        <td class="midHorizental"><a id="5" onclick="played(5)">5</a></td>
-        <td><a id="6" onclick="played(6)">6</a></td>
+        <td><a class="hiddentext" id="4" onclick="played(4)">4</a></td>
+        <td class="midHorizental"><a class="hiddentext" id="5" onclick="played(5)">5</a></td>
+        <td><a class="hiddentext" id="6" onclick="played(6)">6</a></td>
     </tr>
     <tr >
-        <td><a id="7" onclick="played(7)">7</a></td>
-        <td class="midHorizental"><a id="8" onclick="played(8)">8</a></td>
-        <td><a id="9" onclick="played(8)">9</a></td>
+        <td><a class="hiddentext" id="7" onclick="played(7)">7</a></td>
+        <td class="midHorizental"><a class="hiddentext" id="8" onclick="played(8)">8</a></td>
+        <td><a class="hiddentext" id="9" onclick="played(9)">9</a></td>
     </tr>
     </table> 
     <p>Dieses Spiel wurde als Challenge von Ahmad Zia Wasi entwickelt</p>

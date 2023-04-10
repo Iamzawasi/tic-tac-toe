@@ -9,7 +9,7 @@ a{
     font-weight: bold;
     background-color:#80ffc1; 
     font-size: 3rem;
-    padding:0px 15px 0px 15px;
+    padding:0px 20px 0px 20px;
     text-decoration: none;
 }
 th{
@@ -17,17 +17,23 @@ th{
 }
 
 table {
-        margin: 0 auto;
-         border-collapse: collapse;
-    }
+    margin: 0 auto;
+        border-collapse: collapse;
+}
 
-    .middle {
-        border-bottom: 1pt solid black;
-    }
-    .midHorizental {
-        border-right: 1pt solid black;
-        border-left: 1pt solid black;
-    }
-    a:hover{
-        cursor: pointer;
-    }
+.middle {
+    border-bottom: 1pt solid black;
+}
+.midHorizental {
+    border-right: 1pt solid black;
+    border-left: 1pt solid black;
+}
+a:hover{
+    cursor: pointer;
+}
+.hiddentext{
+    color: #80ffc1; ;
+}
+.nonhidden{
+    color:black;
+}

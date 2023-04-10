@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Repository;
-
 use App\Entity\Movement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
 /**
  * @extends ServiceEntityRepository<Movement>
  *
@@ -20,23 +17,24 @@ class MovementRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Movement::class);
     }
-    public function getAllMovements(int $game_id)
+    public function getAllMovements($game_id)
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT * FROM movement
-            WHERE game_id = :game_id
+            SELECT max(id), player_id, game_id, oldmovments, remarks 
+            FROM movement 
+            WHERE game_id=:game_id
             ';
-            
         $stmt = $conn->prepare($sql);
-
         $resultSet = $stmt->executeQuery(['game_id' => $game_id]);
-       return $resultSet->fetchAllAssociative();
-        // returns an array of arrays (i.e. a raw data set)
-        //return $resultSet->fetchAllAssociative();
+        $resultSet=$resultSet->fetchAllAssociative();
+        if(strlen($resultSet[0]["game_id"])){
+            return $resultSet;
+        }else{
+            return 0;
+        }
     }
-
     public function save(Movement $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
