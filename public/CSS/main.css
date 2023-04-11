@@ -11,6 +11,8 @@ a{
     font-size: 3rem;
     padding:0px 20px 0px 20px;
     text-decoration: none;
+    width: 40px;
+    display: block;
 }
 th{
     border:inline;
@@ -32,8 +34,25 @@ a:hover{
     cursor: pointer;
 }
 .hiddentext{
-    color: #80ffc1; ;
+    color: #80ffc1; 
 }
 .nonhidden{
     color:black;
+    pointer-events: none;
+    cursor: default;
+
+}
+#gameId{
+    display: none;
+}
+.won{
+    color:rgb(144, 7, 46);
+    pointer-events: none;
+    cursor: default;
+    font-weight: bold;
+}
+.hidden_lock{
+    color: #80ffc1; 
+    pointer-events: none;
+    cursor: default;
 }
