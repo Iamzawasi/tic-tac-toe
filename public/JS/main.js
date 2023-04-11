@@ -42,14 +42,44 @@ function applyNewStatus(newStatus){
     newStatus= JSON.parse(newStatus)
     if(newStatus.length>0){
         for(i=0; i<newStatus.length;i++) {
-            atag=document.getElementById(`${i+1}`);
-            atag.textContent=newStatus[i]["btnID"];
-            if(newStatus[i]["btnID"]=="O" || newStatus[i]["btnID"]=="X"){
-                atag.className = "nonhidden";
-            }else{
-                atag.className = "hiddentext";
+            if(newStatus[i]["gameID"]){
+                document.getElementById("gameId").textContent=newStatus[i]["gameID"];
+                continue;
             }
-         };
+            atag=document.getElementById(`${i+1}`);
+            (atag!=undefined)?atag.textContent=newStatus[i]["btnID"]:"do nothing";
+            if(newStatus[i]["btnID"]=="O" || newStatus[i]["btnID"]=="X"){
+                (atag!=undefined)?atag.className = "nonhidden":"";
+            }else{
+                (atag!=undefined)?atag.className = "hiddentext":"";
+            }
+            if(newStatus[i]["result"]){
+                checkWinner(newStatus[i]["result"]);
+            }
+        }
+        
     }
 
+}
+function checkWinner(won){
+    console.log(won);
+    Object.keys(won).forEach(function(key) {
+        atag=document.getElementById(`${won[key]}`);
+        atag.className = "won";
+        winner=(atag.textContent=="X")? "PC hat das Spiel gewonnen!": "WOW!, du hast das Spiel gewonnen!";
+    });
+    disableAtags();
+ 
+    setTimeout(function () {alert(winner)}, 400); // announce the winner
+}
+function disableAtags(){
+        getAllbtn=document.getElementsByTagName("a"); // all btn
+        for(i=1;i<=getAllbtn.length;i++){
+            atag=document.getElementById(`${i}`);
+            if(atag.textContent=="X" || atag.textContent=="O"){
+    
+            }else{
+                atag.className="hidden_lock";
+            }      
+        }
 }
