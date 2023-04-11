@@ -26,9 +26,7 @@ class clientRequestController  extends AbstractController{
         //toDo test if any parameter is not available?-->>>>>>>>>>
         $applystatus=new ApplyStat($parameters['input'], $parameters['gameStat'], $parameters['gameId'], $parameters['playerId']);
         $movRepo= $MovementRepository->getAllMovements($applystatus->checkgameID());// to get history from DB
-        if($movRepo){
-            $applystatus->ValidateOldMovments((array)$movRepo[0]["oldmovments"], (array)$parameters['gameStat']);
-        }else{
+
             $mov= new Movement();
             $mov->setMovement($parameters['input']);
             $mov->setGameId($applystatus->gameID);
@@ -39,7 +37,6 @@ class clientRequestController  extends AbstractController{
             $em->persist($mov);
             $em->flush();
             return new Response(json_encode($applystatus->applyStatus) ,Response::HTTP_OK); 
-        }
        
        //return $movRepo;
        //$em = $this->getDoctrine()->getManager();
