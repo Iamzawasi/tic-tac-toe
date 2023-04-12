@@ -1,8 +1,11 @@
+var movInput="O";
 function played(selection=0){
     var url = new URL('http://127.0.0.1/selection')
     var params = {selection:selection} 
     var gameId=document.getElementById("gameId").textContent?document.getElementById("gameId").textContent:0;
     var playerId=document.getElementById("playerId").textContent?document.getElementById("playerId").textContent:0;
+    var twoPl=(document.getElementById("twoPlayer").checked)?true:false;
+    
     //url.search = new URLSearchParams(params).toString();
     fetch(url  ,{
         method: "POST",
@@ -11,6 +14,8 @@ function played(selection=0){
         gameId: gameId,
         playerId: playerId,
         gameStat: getgameStatus(),
+        twoPl: twoPl,
+        movInput:movInput,
 
     }),
         headers: {
@@ -20,6 +25,7 @@ function played(selection=0){
         return response.text(); })
     .then(data=>{ 
         applyNewStatus(data);
+        movInput=(movInput=="O" && twoPl)?"X":"O";
         } );
 }
 
@@ -39,6 +45,9 @@ function getgameStatus(){
 
 function applyNewStatus(newStatus){
     //console.log(newStatus);
+    twoPlayer=document.getElementById("twoPlayer");
+    (twoPlayer!=undefined)?twoPlayer.disabled=true:"";
+    
     newStatus= JSON.parse(newStatus)
     if(newStatus.length>0){
         for(i=0; i<newStatus.length;i++) {
@@ -57,7 +66,6 @@ function applyNewStatus(newStatus){
                 checkWinner(newStatus[i]["result"]);
             }
         }
-        
     }
 
 }
@@ -66,7 +74,8 @@ function checkWinner(won){
     Object.keys(won).forEach(function(key) {
         atag=document.getElementById(`${won[key]}`);
         atag.className = "won";
-        winner=(atag.textContent=="X")? "PC hat das Spiel gewonnen!": "WOW!, du hast das Spiel gewonnen!";
+        checkedBox=document.getElementById("twoPlayer");
+        winner=(atag.textContent=="X")?  ((checkedBox.checked==false)? "PC hat das Spiel gewonnen!": " Spieler 2 hat das Spiel gewonnen!"): ((checkedBox.checked==false)? "WOW!, du hast das Spiel gewonnen!": "Spieler 1 hat das Spiel gewonnen!");
     });
     disableAtags();
  

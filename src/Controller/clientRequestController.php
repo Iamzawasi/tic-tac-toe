@@ -24,7 +24,7 @@ class clientRequestController  extends AbstractController{
  
         $parameters = json_decode($request->getContent(), true);
         //toDo test if any parameter is not available?-->>>>>>>>>>
-        $applystatus=new ApplyStat($parameters['input'], $parameters['gameStat'], $parameters['gameId'], $parameters['playerId']);
+        $applystatus=new ApplyStat($parameters['input'], $parameters['gameStat'], $parameters['gameId'], $parameters['playerId'], $parameters['twoPl'], $parameters['movInput']);
         $movRepo= $MovementRepository->getAllMovements($applystatus->checkgameID());// to get history from DB
 
             $mov= new Movement();
@@ -36,8 +36,13 @@ class clientRequestController  extends AbstractController{
             $em = $doctrine->getManager();
             $em->persist($mov);
             $em->flush();
-            return new Response(json_encode($applystatus->applyStatus) ,Response::HTTP_OK); 
-       
+            return new Response(json_encode($applystatus->applyStatus) ,Response::HTTP_OK);
+
+            // if(rand(1,2)==1){
+            //     return new Response(json_encode($applystatus->applyStatus) ,Response::HTTP_OK);
+            // }else{
+            //     return new Response(json_encode($movRepo) ,Response::HTTP_OK);
+            // }        
        //return $movRepo;
        //$em = $this->getDoctrine()->getManager();
       

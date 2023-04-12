@@ -12,20 +12,25 @@ class ApplyStat{
     public $playerID;
     public $playingAgainst;
     public $gameEnded=false;
-
-    function __construct($currentMove, $gameStat, $gameID, $playerID)
+    public $twoPlayer=false;
+    function __construct($currentMove, $gameStat, $gameID, $playerID, $twoPlayer, $movInput)
     {
         $this->currentMove=$currentMove;
+        $this->twoPlayer=$twoPlayer;
         $this->gameStat=$gameStat;
         $this->gameID=$gameID;
         $this->playerID=$playerID;
         $this->checkgameID();   /// check, validate game ID and produce game ID
         $this->CheckPlayerID(); // Check and assign player ID
-        $this->playingAgainst="pc";
+        $this->playingAgainst=(!$twoPlayer)? "pc": "1";
         if($this->playingAgainst=="pc"){
             $this->checkStatus("O");
             $this->PlayerMovement("O"); //it checks all movements and then call winner function to detect win
             $this->AImovement();
+            $this->SetGameID();
+        }else{ // two players same PC
+            $this->checkStatus($movInput);
+            $this->PlayerMovement($movInput); //it checks all movements and then call winner function to detect win
             $this->SetGameID();
         }
     }
