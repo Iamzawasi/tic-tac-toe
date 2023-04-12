@@ -25,7 +25,16 @@ function played(selection=0){
         return response.text(); })
     .then(data=>{ 
         applyNewStatus(data);
-        movInput=(movInput=="O" && twoPl)?"X":"O";
+        
+        lbl=document.getElementById("lbltwoPlayer");
+        if(movInput=="O" && twoPl){
+            document.getElementById("twoPlayer").style.display = "none"; 
+            lbl.textContent="Spieler 2 Bewegung (X)";
+            movInput="X"
+        }else if(movInput=="X" && twoPl){
+            lbl.textContent="Spieler 1 Bewegung (O)";
+            movInput="O";
+        }
         } );
 }
 
@@ -66,6 +75,8 @@ function applyNewStatus(newStatus){
                 checkWinner(newStatus[i]["result"]);
             }
         }
+    }else{
+        alert("Fehlgeschlagen! aktualisieren Sie Ihre Seite und versuchen Sie es erneut!");
     }
 
 }
