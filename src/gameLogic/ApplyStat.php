@@ -100,20 +100,24 @@ class ApplyStat{
                     array_push($altMoves, $key+1); 
                 }
             }
-            $canWin=array(); // here we check AI wining possibilites
             foreach($possWin as $key=> $innerArray){ // check winning posibilities
+                $canWin=array(); // here we check AI wining possibilites
                 $canWin=array_intersect($innerArray, $hisOwnMov); //$innerarray are wining posibilites  
-                $altCanWin=array_intersect($innerArray, $altMoves);
-                if(count($altCanWin)==2){  // if the competitor is winning then avoid it
-                    $this->AImovmentValiditor($innerArray, $altMoves);
-                    return true;
+                $altCanWin=array_intersect($innerArray, $altMoves); // competitors wining chances
+                if(count($canWin)==2){  // here we check if we have already have two movements only third is required to win
+                    $success=$this->AImovmentValiditor($innerArray, $hisOwnMov);
+                    if($success){
+                        return true;
+                    }
                 }
-                elseif(count($canWin)==2){  // here we check if we have already have two movements only third is required to win
-                    $this->AImovmentValiditor($innerArray, $hisOwnMov);
-                    return true;
+                elseif(count($altCanWin)==2){  // if the competitor is winning then avoid it
+                    $success=$this->AImovmentValiditor($innerArray, $altMoves);
+                    if($success){
+                        return true;
+                    }
                 }
             }
-            $this->AImovmentValiditor();
+            $this->AImovmentValiditor(); // make a random movement
             return true;
 
         }
@@ -129,15 +133,20 @@ class ApplyStat{
                 $this->currentMove=(int)$value;
                 $this->checkStatus($movChar);
                 $possiMov=false;// to disable double executions
+                $this->PlayerMovement($movChar); // update move and announce winner
+                return true;
+            }
+            else{
+                return false;
             }
         }
-    
         $emptyCell=$this->getEmptycells();
         if($emptyCell && $possiMov){
             $this->currentMove=array_rand($emptyCell)+1;
             $this->checkStatus($movChar);
+            $this->PlayerMovement($movChar);  //update move and announce winner
+            return true;
         }
-        $this->PlayerMovement($movChar);
     }
     public function getEmptycells(){ // it produces general empty spots in game
         $emptyCell=$this->applyStatus;
