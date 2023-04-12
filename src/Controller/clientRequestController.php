@@ -14,8 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
-
 class clientRequestController  extends AbstractController{
 
      /**
@@ -40,7 +38,6 @@ class clientRequestController  extends AbstractController{
                 unset($dbmovments[9]);
                 foreach($dbmovments as $key=>$value){
                     if($parameters['gameStat'][$key]["btnID"]!=$value->btnID){
-                       // $applystatus=["difference"=>$value->btnID];
                        return new Response((json_encode(false)) ,Response::HTTP_OK);
                         break;
                     }

@@ -22,15 +22,15 @@ class MovementRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT id, game_id, oldmovments 
+            SELECT * 
             FROM movement 
-            WHERE id=(select max(id) from movement WHERE game_id=:game_id) 
+            WHERE game_id=:game_id ORDER BY id DESC
+            LIMIT 1
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['game_id' => $game_id]);
         $resultSet=$resultSet->fetchAllAssociative();
-        
-        if($resultSet){
+        if(isset($resultSet[0]["game_id"]) && strlen($resultSet[0]["game_id"])){
             return $resultSet;
         }else{
             return 0;
